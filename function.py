@@ -64,3 +64,42 @@ res_9 = filter(lambda x: x == x[::-1], l9)
 list_res_9 = list(res_9)
 print(f"input list is {l9}")
 print(list_res_9)
+
+str = "hello world"
+print(str.split())
+print(f"first 4 characters are {str[:4]}")
+print(f"last 4 characters are {str[-4:]}")
+print(f"every 2nd character even are {str[::2]}")
+print(f"every 2nd character odd are {str[1::2]}")
+print(f"every 2nd character in reverse are {str[::-2]}")
+
+l10 = [1, 2, 3, 4, 5, 6]
+res_10 = filter(lambda x:x % 2 == 0, l10)
+l11 = list(res_10)
+res_11 = map(lambda x: x *2 , l11)
+l12 = list(res_11)
+print(l12)
+
+#ver2
+l13 = list(map(lambda x: x *2 ,filter(lambda x:x % 2 == 0, l10)))
+print(l13)
+
+l14 = ["hi", "world", "map", "filter"]
+l15 = list(map(lambda x: len(x), filter(lambda x: len(x)> 3, l14)))
+print(l15)
+
+def myfunc(*args):
+    return list(filter(lambda x:x % 2 == 0,args))
+
+print(myfunc(5,6,7,8))
+
+def myfunc(s):
+    l = []
+    for i in range(len(s)):
+        if i % 2 == 0:
+            l.append(s[i].lower())
+        else:
+            l.append(s[i].upper())
+    return "".join(l)
+
+print(myfunc("Anthropomorphism"))
