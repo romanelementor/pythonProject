@@ -103,3 +103,45 @@ def myfunc(s):
     return "".join(l)
 
 print(myfunc("Anthropomorphism"))
+
+def maxNumber(*args):
+    return max(args)
+
+print(maxNumber(1,2,31,7,5))
+
+def strConcate(*args):
+    return " ".join(args)
+
+print(strConcate("hello", "world", "python", "is", "awesome"))
+
+def reverseString(s):
+    return s[::-1]
+
+print(reverseString("hello"))
+
+def numMultip(*args):
+    l20 = list(args)
+    result = 1
+    for i in range(len(l20)):
+        result = result * l20[i]
+
+    return result
+
+print(numMultip(2,3,4))
+
+def paper_doll(text):
+    result = ""
+    for i in range(len(text)):
+        result = result + text[i]*3
+    return result
+
+print(paper_doll("hello"))
+
+def polindromfunc(text):
+    n = int(len(text)/2)
+    for i in range(n):
+        if text[i] != text[len(text) - i -1]:
+            return False
+    return True
+
+print(polindromfunc("level"))

@@ -34,3 +34,11 @@ print(f"list11 divisible by 2 or 5 is {list11}")
 fruits = ["apple", "banana", "cherry"]
 list12 = [(x,len(x)) for x in fruits]
 print(f"list12 fruits is {list12}")
+
+list13 = [1,2,3,4,5,0,0,7,0,9,0]
+print(list13[0])
+y = list13[2]
+
+my_list = [1, 2, 2, 3, 4, 4, 5]
+unique_list = list(set(my_list))
+print(f"unique_list is {unique_list}")
