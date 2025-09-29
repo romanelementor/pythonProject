@@ -145,3 +145,32 @@ def polindromfunc(text):
     return True
 
 print(polindromfunc("level"))
+
+def multiply_all(*args):
+    result = 1
+    for i in range(len(args)):
+        result = result * args[i]
+
+    return result
+
+print(multiply_all(1,2,3,4))
+
+def power_sum(power, *args):
+    result = 0
+    for i in range(len(args)):
+        result = result + args[i] ** power
+
+    return result
+
+print(power_sum(2,1,2,3))
+
+def greet(greeting, *names):
+    for name in names:
+        print(f"{greeting} {name}")
+
+print(greet("Hello", "Alice", "Bob", "Charlie"))
+
+def avg_num(*args):
+    return sum(num for num in args)/len(args)
+
+print(avg_num(1,2,3,4,5))
