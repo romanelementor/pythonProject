@@ -19,3 +19,6 @@ item1 = grades["Bob"]
 print(item1)
 second_item = next(islice(grades.values(), 2, None))
 print(second_item)
+
+dict1 = {"id":"1234", "name":"Ron", "age":22}
+print(dict1)
