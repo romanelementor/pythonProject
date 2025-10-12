@@ -56,3 +56,30 @@ print(words_dict)
 
 #t7
 salaries = {"John": 5000, "Emma": 5500, "Kelly": 6000, "Mike": 4500}
+maxKey = 0
+
+for key, value in salaries.items():
+    if maxKey < value:
+        maxKey = value
+        maxName = key
+print(f"the max salary is {maxKey} and the name is {maxName}")
+
+#t8 merge dict
+dict1 = {"a": 1, "b": 2}
+dict2 = {"c": 3, "d": 4}
+dict3 = {**dict1, **dict2}
+dict4 = dict1 | dict2
+print(dict3)
+print(dict4)
+
+#t9 avg grades in dict
+dict1 = {"id": 1, "subjects": [{"name":"Math", "grade":88}, {"name":"Science", "grade":95}], 
+         "id": 2, "subjects": [{"name":"English", "grade":92}]}
+
+students = {"ron": {"math":90, "english":100}, "dan": {"math":90, "english":96}}
+print(students)
+for key,value in students.items():
+    grades = list(value.values())
+    avg = sum(grades)/ len(grades)
+    print(f"{key} has average : {avg}")
+
