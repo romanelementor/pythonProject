@@ -85,4 +85,41 @@ for obj in list_obj:
     print(obj.sound())
 
 
-# t5 
+# t5 class method and static method
+class Employee:
+    company_name = "TechCorp"
+    def __init__(self, name, salary):
+        self.name = name
+        self.salary = salary
+    
+    @classmethod
+    def change_company(cls, new_name):
+        cls.company_name = new_name
+    
+    @classmethod
+    def print_company(cls):
+        print(cls.company_name)
+
+    @staticmethod
+    def add(a, b):
+        return a +b
+    
+    @staticmethod
+    def print_static(s):
+        print(f"This is a static method : {s}")
+    
+    def __str__ (self):
+        return f"instance print method: {self.name} {self.salary}"
+    
+company1 = Employee("John", 10000)
+company2 = Employee("Ron", 20000)
+print(company1)
+print(company2)
+
+Employee.change_company("DBT")
+Employee.print_company()
+company2.change_company("DBT v2")
+Employee.print_company()
+
+print(Employee.add(10,20))
+Employee.print_static("hi")
