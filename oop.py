@@ -123,3 +123,25 @@ Employee.print_company()
 
 print(Employee.add(10,20))
 Employee.print_static("hi")
+
+# t6 Dunder/magic Methods (__str__, __add__)
+class Point:
+    def __init__(self,x,y):
+        self.x = x
+        self.y = y
+
+    def __str__(self):
+        return f"Point ({self.x}, {self.y})"
+
+    def __add__(self, other):
+        if isinstance(other, Point):
+            return Point(self.x + other.x, self.y + other.y)
+        else:
+            raise TypeError("Can only add Point objects: {type(other)}")
+
+p1 = Point(2, 3)
+p2 = Point(4, 5)
+print(p1 + p2)  # (6, 8)
+
+
+# Challenge 1: Abstract Class – Payment System
