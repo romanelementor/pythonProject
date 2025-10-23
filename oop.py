@@ -176,6 +176,12 @@ class PayPalPayment(Payment):
 pay1 = CreditCardPayment(100)
 pay2 = PayPalPayment(1000)
 
-print(pay1)
-print(pay2)
+print(f" First print {pay1}")
+print(f" First print {pay2}")
 
+l = [pay1, pay2]
+for obj in l:
+    print(obj)
+
+
+# Challenge 2: Property Decorators – Temperature Converter
