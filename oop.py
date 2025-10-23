@@ -185,3 +185,33 @@ for obj in l:
 
 
 # Challenge 2: Property Decorators – Temperature Converter
+# Challenge 2: Property Decorators – Temperature Converter
+c# Challenge 2: Property Decorators – Temperature Converter
+class Temperature:
+    def __init__(self, celsius):
+        self._celsius = celsius
+
+    @property
+    def celsius(self):
+        print("this is a getter !")
+        return self._celsius
+    
+    @celsius.setter
+    def celsius(self, value):
+        print("This is a setter !")
+        if value < -273.15:
+            raise ValueError("Not good value")
+        self._celsius = value
+
+    @property
+    def fahrenheit(self):
+        return (self._celsius * 9/5) + 32
+    
+    @fahrenheit.setter
+    def fahrenheit(self, value):
+        self._celsius = (value - 32) * 5/9
+        
+t1 = Temperature(25)
+print(t1.fahrenheit)
+t1.fahrenheit = 32
+print(t1.fahrenheit)
