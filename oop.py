@@ -145,3 +145,37 @@ print(p1 + p2)  # (6, 8)
 
 
 # Challenge 1: Abstract Class – Payment System
+from abc import ABC, abstractmethod
+
+class Payment(ABC): 
+    @abstractmethod
+    def pay(amount):
+        """This is abstract method must be implemented by all subclasses"""
+        pass
+class CreditCardPayment(Payment):
+    def __init__(self,amount):
+        self.amount = amount
+
+    def pay(self, amount):
+        return f"Paid {amount} using Credit Card"
+    
+    def __str__(self):
+        return self.pay(self.amount)
+        
+        
+class PayPalPayment(Payment):
+    def __init__(self, amount):
+        self.amount = amount
+
+    def pay(self, amount):
+        return f"Paid {amount} using PayPal"
+    
+    def __str__(self):
+        return self.pay(self.amount)
+    
+pay1 = CreditCardPayment(100)
+pay2 = PayPalPayment(1000)
+
+print(pay1)
+print(pay2)
+
