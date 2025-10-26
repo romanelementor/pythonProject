@@ -218,3 +218,62 @@ print(t1.fahrenheit)
 
 
 # Composition – Library & Books
+class Book:
+    def __init__(self,title, auther):
+        self.title = title
+        self.auther = auther
+
+class Library:
+    def __init__(self):
+        self.books = []
+
+    def add_book(self,book):
+        self.books.append(book)
+
+    def show_books(self):
+        for book in self.books:
+            print(f"The book {book.title}, by {book.auther}")
+
+b1 = Book("1984", "George Orwell")
+b2 = Book("The Hobbit", "J.R.R. Tolkien")
+lib = Library()
+lib.add_book(b1)
+lib.add_book(b2)
+lib.show_books()
+
+
+# Challenge 4: Inheritance Chain – Employee Hierarchy#Challenge 4: Inheritance Chain – Employee Hierarchy
+class Person:
+    def __init__(self, name, age):
+        self.name= name
+        self.age = age
+        print("this is Person class constructor")
+
+    def display(self):
+        print(f"name: {self.name}, age: {self.age}")
+
+class Employee(Person):
+    def __init__(self, name, age, salary):
+        super().__init__(name, age)
+        self.salary = salary
+        print("this is Employe class constructor")
+
+    def display(self):
+        super().display()
+        print(f"salary: {self.salary}")
+
+class Manager(Employee):
+    def __init__(self, name, age, salary, dept):
+        super().__init__(name, age, salary)
+        self.dept = dept
+        print("this is Manager class constructor")
+
+    def display_info(self):
+        super().display()
+        print(f"dept:{self.dept}")
+
+m1 = Manager("John", 35, 80000, "IT")
+m1.display_info()
+
+
+# Challenge 5: Encapsulation & Property Decorators – Employee Salary
