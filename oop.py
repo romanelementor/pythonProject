@@ -276,4 +276,70 @@ m1 = Manager("John", 35, 80000, "IT")
 m1.display_info()
 
 
-# Challenge 5: Encapsulation & Property Decorators – Employee Salary
+# Challenge 5 - Polymorphism + Composition – Shape Area Calculator
+from abc import ABC, abstractmethod
+class Shape(ABC):
+    @abstractmethod
+    def area(self):
+        "this is abs method area"
+        pass
+
+class Circle(Shape):
+    def __init__(self,radius):
+        self.radius = radius
+
+    def area(self):
+        return 3.14 * self.radius * self.radius
+
+class Rectangle(Shape):
+    def __init__(self,height,width):
+        self.height = height
+        self.width = width
+
+    def area(self):
+        return self.height * self.width
+    
+class ShapeCalculator:
+    def __init__(self, shapesList):
+        self.shapesList = shapesList
+
+    def total_area(self):
+        total = 0
+        for shape in self.shapesList:
+            print(shape.area())
+            total = total + shape.area()
+        return total
+
+
+s1 = Circle(5)
+s2 = Rectangle(5,10)
+shapes = [s1, s2]
+sc = ShapeCalculator(shapes)
+sc.total_area()
+
+
+# Challenge 6: Design Pattern – Singleton Logger
+class Logger:
+    _instance = None
+
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance
+
+    def __init__(self):
+        self.logs = []
+
+    def log(self, msg):
+        self.logs.append(msg)
+
+    def show_logs(self):
+        return self.logs
+
+logger1 = Logger()
+logger2 = Logger()
+print(logger1 is logger2)  # True
+logger1.log("System started.")
+print(logger2.show_logs())
+logger2.log("User logged in.")
+print(logger2.show_logs())
