@@ -185,8 +185,6 @@ for obj in l:
 
 
 # Challenge 2: Property Decorators – Temperature Converter
-# Challenge 2: Property Decorators – Temperature Converter
-c# Challenge 2: Property Decorators – Temperature Converter
 class Temperature:
     def __init__(self, celsius):
         self._celsius = celsius
