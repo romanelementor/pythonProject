@@ -103,6 +103,14 @@ class ShoppingCart:
     def __str__(self) -> str:
         return f"ShoppingCart data: {self.items} total: {self.get_total()}"
 
+class Payment(ABC):
+    @abstractmethod
+    def pay(self, amount):
+        pass
+
+class CreditCardPayment(Payment):
+    def __init__(self, amount):
+        self.amount = amount
 
 class Order:
     def __init__(self, order_id, products, customer, order_date):
