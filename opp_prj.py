@@ -1,135 +1,156 @@
-# project Online store
 from abc import ABC, abstractmethod
 import datetime
 
 class Product:
-    def __init__(self, name, price, stock, category):
-        self._name = name
-        self._price = price
-        self._stock = stock
-        self._category = category
+	def __init__(self,name, stock, price):
+		self._name = name
+		self._stock = stock
+		self.price = price
 
-    @property
-    def name(self):
-        return self._name
+	@property
+	def name(self):
+		print("This is a getter ")
+		return self._name
 
-    @property
-    def get_price(self):
-        return self._price
+	@name.setter
+	def name(self, value):
+		print("This is a setter name ")
+		self._name = value
 
-    @property
-    def get_category(self):
-        return self._category
+	@property
+	def stock(self):
+		print("This a stock getter")
+		return self._stock
 
-    @property
-    def get_stock(self):
-        return self._stock
-
-    @price.setter
-    def price(self, value):
-        self._price = value
-
-    @category.setter
-    def category(self, value):
-        self._category = value
-
-    @quantity.setter
-    def quantity(self, value):
-        self._quantity = value
-
-    def __str__(self) -> str:
-        return f"Product data: {self._name}, price: {self._price}, stock: {self._stock}, category: {self._category}"
-
+	@stock.setter
+	def stock(self, value):
+		print("This is a stock setter")
+		if value > 0:
+			self._stock += value
+		else:
+			raise ValueError("setter will not work , value < =0 ")
 
 class Customer:
-    def __init__(self, name, email, address):
-        self._name = name
-        self._email = email
-        self._address = address
+	def __init__(self, id, name, address):
+		self._id = id
+		self._name = name
+		self._address = address
 
-    @property
-    def name(self):
-        return self._name
+	@property
+	def name(self):
+		print("customer getter")
+		return self._name
 
-    @property
-    def address(self):
-        return self._address
+	@property
+	def address(self):
+		print("custom getter address")
+		return self._address
 
-    @name.setter
-    def name(self, value):
-        self._name = value
-
-    @address.setter
-    def address(self, value):
-        self._address = value
-
-    def __str__(self) -> str:
-        return f"Customer data: {self._name}, {self._email}, {self._address}"
+	@name.setter
+	def name(self, value):
+		self._name = value
 
 
-class CartItem:
-    def __init__(self, product, quantity):
-        self._product = product
-        self._quantity = quantity
+class ItemCart:
+	def __init__(self, product, quantity):
+		self.product = product
+		self.quantity = quantity
 
-    def get_product(self):
-        return self._product
+	def get_total(self):
+		return self.quantity * self.product.price
 
-    def get_quantity(self):
-        return self._quantity
-
-    def get_total(self):
-        return self.product.price * self.quantity
-
-    def __str__(self) -> str:
-        return f"CartItem data: {self._product}, {self._quantity}"
 
 class ShoppingCart:
-    def __init__(self):
-        self.items = []
+	def __init__(self):
+		self.items = []
 
-    def add_item(self, cart_item):
-        self.items.append(cart_item)
+	def add_item(self, product, quantity):
+		if product.stock >= quantity :
+			self.items.append(ItemCart(product, quantity))
+		else:
+			print(f"not enough {product.name} in stock. ")
 
-    def remove_item(self, cart_item):
-        self.items.remove(cart_item)
+	def get_total(self):
+		return sum(item.get_total() for item in self.items)
 
-    def get_total(self):
-        total = 0
-        for item in self.items:
-            total += item.get_total()
-        return total
+	def show_cart(self):
+		for item in self.items:
+			print( f"Item is {item.product.name}, price is {item.get_total()}" )
 
-    def __str__(self) -> str:
-        return f"ShoppingCart data: {self.items} total: {self.get_total()}"
 
 class Payment(ABC):
-    @abstractmethod
-    def pay(self, amount):
-        pass
+	@abstractmethod
+	def pay(self, amount):
+		pass
 
 class CreditCardPayment(Payment):
-    def __init__(self, amount):
-        self.amount = amount
+	def __init__(self, card_number):
+		self. card_number = card_number
+
+	def pay(self, amount):
+		print(f"Paid ${amount:.2f}, {amount} using credit card")
+
+class PayPalPayment(Payment):
+	def __init__(self, email):
+		self.email = email
+
+	def pay(self, amount):
+		print(f"This is PayPal payment")
+
+class Logger:
+	_instance = None
+
+	def __new__(cls):
+		if cls._instance is None:
+			cls._instance = super().__new__(cls)
+		return cls._instance
+
+	def __init__(self):
+		self.msg_list = []
+
+	def log(self, msg):
+		now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+		self.msg_list.append(msg)
+		print(f" {now} {msg}")
+
 
 class Order:
-    def __init__(self, order_id, products, customer, order_date):
-        self._order_id = order_id
-        self._products = products
-        self._customer = customer
-        self._order_date = order_date
+	def __init__(self, customer, shopping_cart, payment_method):
+		self.customer= customer
+		self.shopping_cart = shopping_cart
+		self.payment_method = payment_method
+		self.logger = Logger()
 
-    def get_order_id(self):
-        return self._order_id
+	def complete_order(self):
+		total = self.shopping_cart.get_total()
+		if total == 0:
+			print("Cart is empty")
+			return
+		self.payment_method.pay(total)
+		self.logger.log("Order completed")
 
-    def get_products(self):
-        return self._products
 
-    def get_customer(self):
-        return self._customer
+# usage
+if __name__ == "__main__":
+    # Products
+    p1 = Product("Laptop", 1200, 5)
+    p2 = Product("Headphones", 150, 10)
+    p3 = Product("Mouse", 40, 20)
+    
+    # Customer
+    c1 = Customer(123, "Alice", "alice@example.com")
+    
+    # Shopping Cart
+    cart = ShoppingCart()
+    cart.add_item(p1, 1)
+    cart.add_item(p2, 2)
+    cart.add_item(p3, 3)
+    cart.show_cart()
+    
+    # Payment Method
+    payment = PayPalPayment("alice@paypal.com")
 
-    def get_order_date(self):
-        return self._order_date
-
-    def add_product(self, product):
-        self._products.append(product)
+    # Order
+    order = Order(c1, cart, payment)
+    order.complete_order()
+    
