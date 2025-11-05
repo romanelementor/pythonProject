@@ -9,22 +9,18 @@ class Product:
 
 	@property
 	def name(self):
-		print("This is a getter ")
 		return self._name
 
 	@name.setter
 	def name(self, value):
-		print("This is a setter name ")
 		self._name = value
 
 	@property
 	def stock(self):
-		print("This a stock getter")
 		return self._stock
 
 	@stock.setter
 	def stock(self, value):
-		print("This is a stock setter")
 		if value > 0:
 			self._stock += value
 		else:
@@ -113,6 +109,9 @@ class Logger:
 		self.msg_list.append(msg)
 		print(f" {now} {msg}")
 
+	def show_logs(self):
+		return self.msg_list
+
 
 class Order:
 	def __init__(self, customer, shopping_cart, payment_method):
@@ -129,6 +128,12 @@ class Order:
 		self.payment_method.pay(total)
 		self.logger.log("Order completed")
 
+	def add_to_logger(self):
+		self.logger.log("This is a logger for order completion. " + str(self.shopping_cart.get_total()))
+
+	def get_logs(self):
+		return self.logger.show_logs()
+
 
 # usage
 if __name__ == "__main__":
@@ -139,18 +144,26 @@ if __name__ == "__main__":
     
     # Customer
     c1 = Customer(123, "Alice", "alice@example.com")
-    
+
+    print("Cart before adding items:")
+
     # Shopping Cart
     cart = ShoppingCart()
     cart.add_item(p1, 1)
     cart.add_item(p2, 2)
     cart.add_item(p3, 3)
+
+    print("Cart items after adding items")
+
     cart.show_cart()
-    
+
+    print("Cart after adding items:")
+
     # Payment Method
     payment = PayPalPayment("alice@paypal.com")
 
     # Order
     order = Order(c1, cart, payment)
     order.complete_order()
-    
+    order.add_to_logger()
+    print(order.get_logs())
