@@ -63,3 +63,8 @@ print(f"list_students is {list_students}")
 coords = [(1, 2), (3, 4), (5, 6)]
 Flatten = [x * 2 for tuples in coords for x in tuples ] 
 print(f"Flatten is {Flatten}")
+
+
+numbers = [(2, 3), (10, 1), (4, 4), (7, 2)]
+list_numbers = [(x,y) for x,y in numbers if x+y > 7 ]
+print(f"list_numbers is {list_numbers}")
