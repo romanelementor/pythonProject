@@ -42,4 +42,3 @@ def squared(gen):
 
 for num in squared(number_generator(5)):
 	print(num)
-

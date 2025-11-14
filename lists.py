@@ -42,3 +42,24 @@ y = list13[2]
 my_list = [1, 2, 2, 3, 4, 4, 5]
 unique_list = list(set(my_list))
 print(f"unique_list is {unique_list}")
+
+
+# repeating lists
+print(" --New Tasks !!! --")
+pairs = [(1, "one"), (2, "two"), (3, "three"), (4, "four")]
+list_zugi = []
+for num, word in pairs:
+	if num % 2 == 0:
+		list_zugi.append(word)
+print(f"list_zugi is {list_zugi}")
+
+list_zugi_2 = [word for number, word in pairs if number%2 ==0]
+print(f"list_zugi_2 is {list_zugi_2}")
+
+students = [("Alice", 85), ("Bob", 70), ("Charlie", 90)]
+list_students = [name+":"+str(scope) for name, scope in students ]
+print(f"list_students is {list_students}")
+
+coords = [(1, 2), (3, 4), (5, 6)]
+Flatten = [x * 2 for tuples in coords for x in tuples ] 
+print(f"Flatten is {Flatten}")
